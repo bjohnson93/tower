@@ -6,6 +6,8 @@
     <router-view />
   </main>
 
+  <ModalComponent />
+
 </template>
 
 <script>

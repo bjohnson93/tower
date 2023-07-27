@@ -3,6 +3,7 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TowerEventsService {
 
+
   async getTowerEvents() {
     const towerEvents = await dbContext.TowerEvents.find()
       .populate('creator', 'name picture')
@@ -28,18 +29,35 @@ class TowerEventsService {
     if (originalEvent.creatorId.toString() != userId) {
       throw new Forbidden('You did not create this event!')
     }
-    originalEvent.name = towerEventData || originalEvent.name
-    originalEvent.description = towerEventData || originalEvent.description
-    originalEvent.coverImg = towerEventData || originalEvent.coverImg
-    originalEvent.location = towerEventData || originalEvent.location
-    originalEvent.capacity = towerEventData || originalEvent.capacity
-    originalEvent.startDate = towerEventData || originalEvent.startDate
-    originalEvent.isCanceled = towerEventData || originalEvent.isCanceled
-    originalEvent.type = towerEventData || originalEvent.type
 
-    await originalEvent.save()
+    if (originalEvent.isCanceled) {
+      throw new BadRequest('You can not edit an already cancelled event')
+    }
+    originalEvent.name = towerEventData.name || originalEvent.name
+    originalEvent.description = towerEventData.description || originalEvent.description
+    originalEvent.coverImg = towerEventData.coverImg || originalEvent.coverImg
+    originalEvent.location = towerEventData.location || originalEvent.location
+    // originalEvent.capacity = towerEventData || originalEvent.capacity
+    originalEvent.startDate = towerEventData.startDate || originalEvent.startDate
+    originalEvent.type = towerEventData.type || originalEvent.type
 
-    return originalEvent
+    let updatedEvent = await originalEvent.save()
+
+    return updatedEvent
+  }
+
+  async cancelTowerEvent(towerEventId, userId) {
+    const eventToCancel = await this.getTowerEventById(towerEventId)
+
+    if (eventToCancel.creatorId.toString() != userId) {
+      throw new Forbidden(`You are not the creator of ${eventToCancel.name}, you can't cancel this event!`)
+    }
+    if (eventToCancel.isCanceled) {
+      throw new BadRequest(`${eventToCancel.name} has already been cancelled, you can not cancel again.`)
+    }
+    eventToCancel.isCanceled = true
+    await eventToCancel.save()
+    return eventToCancel
   }
 }
 

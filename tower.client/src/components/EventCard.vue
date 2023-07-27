@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'TowerEvent', params: {towerEventId: eventProp.id }}">
+  <router-link :to="{ name: 'TowerEvent', params: {eventId: eventProp.id }}">
   <div class="bg-secondary text-light rounded border border-info mb-3">
       <img class="eventImg img-fluid rounded-top" :src="eventProp.coverImg" :alt="eventProp.name">
       <p class="fs-4 p-2">{{ eventProp.name }}</p>
@@ -24,7 +24,8 @@ export default {
 
 <style lang="scss" scoped>
 .eventImg{
-  height: 28vh;
+  height: auto;
+  width: fit-content;
   object-fit: cover;
   object-position: center;
 }
