@@ -22,13 +22,12 @@ class TicketsService {
       Pop.toast(error.message, 'error')
     }
   }
-  // async deleteMyTicket(ticketId) {
-  //   const res = await api.delete(`api/tickets/${ticketId}`)
-  //   AppState.myTickets = AppState.myTickets.filter(ticket => ticket.id != ticketId)
-  //   AppState.tickets = AppState.tickets.filter(myTicket => myTicket.Id != ticketId)
-  //   logger.log('[DID IT DELETE MY TICKET?]', res.data)
-  // }
-  //delete function comes from profile page......
+  async deleteMyTicket(ticketId) {
+    const res = await api.delete(`api/tickets/${ticketId}`)
+    AppState.myTickets = AppState.myTickets.filter(ticket => ticket.id != ticketId)
+    AppState.tickets = AppState.tickets.filter(myTicket => myTicket.Id != ticketId)
+    logger.log('[DID IT DELETE MY TICKET?]', res.data)
+  }
 }
 
 export const ticketsService = new TicketsService()

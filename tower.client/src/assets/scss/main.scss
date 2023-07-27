@@ -12,7 +12,10 @@ body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--body-bg);
+  background-color: #0f2b39;
+  background-image: url(https://images.unsplash.com/photo-1613401927613-c4eb259fa369?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWdhdGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60);
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 main {

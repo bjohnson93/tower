@@ -12,11 +12,11 @@ class CommentsService {
     return newComment
   }
   async removeComment(commentId, userId) {
-    const commentToDelete = await dbContext.Comments.find({ commentId: commentId })
+    const commentToDelete = await dbContext.Comments.findById(commentId)
     if (!commentToDelete) {
       throw new BadRequest('There is no such comment with that ID')
     }
-    if (commentToDelete.creatorId.toString() != userId) {
+    if (commentToDelete.creatorId != userId) {
       throw new Forbidden('You cannot delete comment you did not make.')
     }
     await commentToDelete.remove()

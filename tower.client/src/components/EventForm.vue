@@ -43,7 +43,7 @@
 
 <script>
 import { ref, watchEffect } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
 import { towerEventsService } from "../services/TowerEventsService.js";
 import { Modal } from "bootstrap";
@@ -77,7 +77,7 @@ export default {
           const towerEvent = await towerEventsService.createTowerEvent(towerEventData)
           editable.value = {}
           Modal.getOrCreateInstance('#exampleModal').hide()
-          router.push({name: 'TowerEvent', params: {towerEventId: towerEvent.id}})
+          router.push({name: 'TowerEvent', params: {eventId: towerEvent.id}})
         } catch (error) {
           Pop.error(error.message)
         }

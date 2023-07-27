@@ -37,4 +37,23 @@ footer {
   place-content: center;
   height: 32px;
 }
+.createButton{
+/* From https://css.glass */
+background: rgba(200, 245, 245, 0.69);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.9px);
+-webkit-backdrop-filter: blur(7.9px);
+border: 1px solid rgba(200, 245, 245, 0.3);
+}
+.orangeSherbet{
+/* From https://css.glass */
+background: rgba(200, 245, 245, 0.69);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.9px);
+-webkit-backdrop-filter: blur(7.9px);
+border: 1px solid rgba(200, 245, 245, 0.3);
+}
+
 </style>
